@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID-Card Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f2f2f2;
+            font-family: sans-serif;
+            display: flex;
+            
+        }
+
+        .card-container {
+            
+            display: none;
+            position: relative;
+            padding: 20px;
+            margin: 50px auto;
+            max-width: 410px;
+            background-color: rgb(255, 255, 255);
+            border-bottom: 2px solid rgb(0, 110, 255);
+            border-top: 2px solid rgb(0, 110, 255);
+            border-left: 1px solid rgb(5, 5, 5);
+            border-right: 1px solid rgb(0, 0, 0);
+            display: flex;
+            flex-direction: column;
+        }
+        #idCard{
+            display: none;
+        }
+
+
+        .logo img {
+            width: 50px;
+            height: 70px;
+        }
+
+        .identity {
+            color: rgb(0, 139, 194);
+        }
+
+        .userImg {
+            width: 99px;
+            height: 80px;
+            position: relative;
+            float: right;
+            margin-top: -90px;
+            margin-right: -10px;
+            z-index: 1;
+        }
+
+        .govImg {
+            width: 70%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .details {
+            z-index: 2;
+        }
+
+        .container {
+            padding: 20px;
+            margin: 50px auto;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container h1 {
+            margin-bottom: 20px;
+        }
+
+        .container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container label {
+            margin-top: 10px;
+        }
+
+        .container input,
+        .container select,
+        .container button {
+            margin-top: 5px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .container button {
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Welcome to ID-Card Generator</h1>
+        <form id="idCardForm">
+            <label for="UserName">Student name:</label>
+            <input type="text" name="UserName" id="UserName" placeholder="Enter student name" required>
+            <label for="RollNo">Roll No: </label>
+            <input type="text" name="RollNo" id="RollNo" placeholder="Enter Roll no" required>
+            <label for="distanceLearning">Distance learning</label>
+            <select name="distanceLearning" id="DIstanceLearning">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+            <label for="CitySelect">Select your city</label>
+            <select name="CitySelect" id="CitySelect">
+                <option value="Karachi">Karachi</option>
+                <option value="Heyderabad">Heyderabad</option>
+                <option value="Lahore">Lahore</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Pindi">Pindi</option>
+            </select>
+            <label for="timeSelect">Selecet Days & Time</label>
+            <select name="timeSelect" id="timeSelect">
+                <option value="Wednesday-07:00 AM-10:00 PM">Wednesday-07:00 AM-10:00 PM</option>
+                <option value="Wednesday-02:00 PM-05:00 PM">Wednesday-02:00 PM-05:00 PM</option>
+                <option value="Wednesday-07:00 PM-10:00 PM">Wednesday-07:00 PM-10:00 PM</option>
+                <option value="Sunday-07:00 AM-10:00 PM">Sunday-07:00 AM-10:00 PM</option>
+                <option value="Sunday-02:00 PM-05:00 PM">Sunday-02:00 PM-05:00 PM</option>
+                <option value="Sunday-07:00 PM-10:00 PM">Sunday-07:00 PM-10:00 PM</option>
+                <option value="Monday-07:00 AM-10:00 PM">Monday-07:00 AM-10:00 PM</option>
+                <option value="Monday-02:00 PM-05:00 PM">Monday-02:00 PM-05:00 PM</option>
+                <option value="Monday-07:00 PM-10:00 PM">Monday-07:00 PM-10:00 PM</option>
+            </select>
+            <button type="submit">submit</button>
+        </form>
+    </div>
+
+    <div class="card-container" id="idCard">
+        <div class="logo">
+            <img src="Governor_of_Sindh_Logo.png" alt="LOGO">
+        </div>
+        <div class="user-img">
+            <img class="userImg" src="Programming.png" alt="">
+        </div>
+        <img src="cover.1d863e39.png" alt="Governor_of_Sindh_Logo" class="govImg">
+        <div class="details">
+            <span class="identity">Name: </span><span id="name"></span><br>
+            <span class="identity">Roll No: </span><span id="rollNum"></span><br>
+            <span class="identity">Distance learning: </span><span id="disLearning"></span><br>
+            <span class="identity">City: </span><span id="City"></span><br>
+            <span class="identity">Center: </span>Governor House Karachi<span id="Center"></span><br>
+            <span class="identity">Campus: </span>Main<span id="Campus"></span><br>
+            <span class="identity">Days/Time: </span><span id="Time"></span><br>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('idCardForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get form values
+            const userName = document.getElementById('UserName').value;
+            const rollNo = document.getElementById('RollNo').value;
+            const distanceLearning = document.getElementById('DIstanceLearning').value;
+            const city = document.getElementById('CitySelect').value;
+            const time = document.getElementById('timeSelect').value;
+            
+            // Update card details
+            document.getElementById('name').innerText = userName;
+            document.getElementById('rollNum').innerText = rollNo;
+            document.getElementById('disLearning').innerText = distanceLearning;
+            document.getElementById('City').innerText = city;
+            document.getElementById('Time').innerText = time;
+            
+            // Hide the form and show the card
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('idCard').style.display = 'block';
+        });
+    </script>
+
+</body>
+
+</html>
